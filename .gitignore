@@ -1,0 +1,13 @@
+# Dependencies / SDKs (install separately)
+google-cloud-sdk/
+
+# OS
+.DS_Store
+
+# Node
+node_modules/
+
+# Env / secrets
+.env
+.env.local
+*.pem

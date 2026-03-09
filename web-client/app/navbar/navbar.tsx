@@ -2,18 +2,20 @@
 
 import SignIn from "./sign-in";
 import Link from "next/link";
+import Image from "next/image";
 
 import styles from "./navbar.module.css";
 import { useEffect, useState } from "react";
 import { onAuthStateChangedHelper } from "../firebase/firebase";
 import { User } from "firebase/auth";
+import Upload from "./upload";
 
 
 function NavBar() {
   // Initialize user state
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     const unsubscribe = onAuthStateChangedHelper((user) => {
       setUser(user);
     });
@@ -24,12 +26,14 @@ function NavBar() {
 
 
   return (
-    <nav className={styles.nav}>
+     <nav className={styles.nav}>
       <Link href="/">
-        <span className={styles.logoContainer}>
-          <img className={styles.logo} src="/NoissyBoxLogo.svg" alt="Noissy Box  Logo" />
-        </span>
+        <Image width={90} height={20}
+          src="/NoissyBoxLogo.svg" alt="Noissy Box Logo"/>
       </Link>
+      { 
+        user && <Upload />
+      }
       <SignIn user={user} />
     </nav>
   );
